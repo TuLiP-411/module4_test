@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/create-student">Create new student</a>
+<h1>Students</h1>
+<br>
+<form action="/search-student">
+    <label>
+        Search student by name
+        <input type="text" name="name">
+    </label>
+    <input type="submit" value="Search">
+</form>
+<br>
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Date of Birth</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Classroom</th>
+    </tr>
+    <th:block th:each="student : ${students}">
+        <tr>
+            <td th:text="${student.name}"></td>
+            <td th:text="${student.dob}"></td>
+            <td th:text="${student.address}"></td>
+            <td th:text="${student.phone}"></td>
+            <td th:text="${student.email}"></td>
+            <td th:text="${student.classroom?.name}"></td>
+            <td><a th:href="@{/edit-student/__${student.id}__ }">Edit</a></td>
+            <td><a th:href="@{/delete-student/__${student.id}__ }">Delete</a></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>
